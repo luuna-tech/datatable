@@ -3980,7 +3980,13 @@ class RowManager {
 
         // update internal map
         if (toggle) {
-            this.checkMap = Array.from(Array(this.getTotalRows())).map(c => value);
+            if (this.datamanager._filteredRows) {
+                this.datamanager._filteredRows.forEach(f => {
+                    this.checkRow(f, toggle);
+                });
+            } else {
+                this.checkMap = Array.from(Array(this.getTotalRows())).map(c => value);
+            }
         } else {
             this.checkMap = [];
         }
